@@ -19,8 +19,6 @@ function my_plugin_deactivate() {
 }
 register_deactivation_hook(__FILE__, 'my_plugin_deactivate');
 
-register_deactivation_hook(__FILE__, 'my_plugin_deactivate');
-
 /**
  * Function to display an animated message on the frontend
  */
