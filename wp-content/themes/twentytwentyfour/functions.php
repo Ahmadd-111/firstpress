@@ -204,3 +204,161 @@ if ( ! function_exists( 'twentytwentyfour_pattern_categories' ) ) :
 endif;
 
 add_action( 'init', 'twentytwentyfour_pattern_categories' );
+
+/**
+ * Add custom post type for Movies.
+ */
+if ( ! function_exists( 'create_movies_post_type' ) ) :
+
+	function create_movies_post_type() {
+		$labels = array(
+			'name'               => 'Movies',
+			'singular_name'      => 'Movie',
+			'menu_name'          => 'Movies',
+			'name_admin_bar'     => 'Movie',
+			'add_new'            => 'Add New',
+			'add_new_item'       => 'Add New Movie',
+			'new_item'           => 'New Movie',
+			'edit_item'          => 'Edit Movie',
+			'view_item'          => 'View Movie',
+			'all_items'          => 'All Movies',
+			'search_items'       => 'Search Movies',
+			'not_found'          => 'No movies found.',
+			'not_found_in_trash' => 'No movies found in Trash.',
+		);
+
+		$args = array(
+			'labels'             => $labels,
+			'public'             => true,
+			'has_archive'        => true,
+			'show_in_rest'       => true,
+			'supports'           => array('title', 'editor', 'thumbnail'),
+			'menu_icon'          => 'dashicons-video-alt2',
+			'rewrite'            => array('slug' => 'movies'),
+		);
+
+		register_post_type('movie', $args);
+	}
+endif;
+
+add_action('init', 'create_movies_post_type');
+
+/**
+ * Add taxonomy for Movies.
+ */
+if ( ! function_exists( 'create_movie_taxonomies' ) ) :
+
+	function create_movie_taxonomies() {
+		$labels = array(
+			'name'              => 'Movie Categories',
+			'singular_name'     => 'Movie Category',
+			'search_items'      => 'Search Movie Categories',
+			'all_items'         => 'All Movie Categories',
+			'parent_item'       => 'Parent Category',
+			'parent_item_colon' => 'Parent Category:',
+			'edit_item'         => 'Edit Movie Category',
+			'update_item'       => 'Update Movie Category',
+			'add_new_item'      => 'Add New Movie Category',
+			'new_item_name'     => 'New Movie Category Name',
+			'menu_name'         => 'Movie Categories',
+		);
+
+		$args = array(
+			'labels'            => $labels,
+			'hierarchical'      => true,
+			'show_ui'           => true,
+			'show_admin_column' => true,
+			'query_var'         => true,
+			'rewrite'           => array('slug' => 'movie-category'),
+		);
+
+		register_taxonomy('movie_category', array('movie'), $args);
+	}
+endif;
+
+add_action('init', 'create_movie_taxonomies');
+
+function add_movie_meta_boxes() {
+    // add_meta_box('movie_details', 'Movie Details', 'movie_meta_callback', 'movie', 'normal', 'high');
+	add_meta_box(
+        'movie_meta_box', // Meta box ID
+        'Movie Details', // Title
+        'display_movie_meta_box', // Callback function
+        'movie', // Post type
+        'normal', // Context
+        'high' // Priority
+    );
+}
+add_action('add_meta_boxes', 'add_movie_meta_boxes');
+
+function display_movie_meta_box($post) {
+    // $director = get_post_meta($post->ID, 'movie_director', true);
+    // $release_year = get_post_meta($post->ID, 'movie_release_year', true);
+    
+    // echo '<label>Director:</label>';
+    // echo '<input type="text" name="movie_director" value="' . esc_attr($director) . '" style="width:100%;"><br><br>';
+    
+    // echo '<label>Release Year:</label>';
+    // echo '<input type="number" name="movie_release_year" value="' . esc_attr($release_year) . '" style="width:100%;">';
+
+	// Get saved values (if any)
+    $director = get_post_meta($post->ID, 'movie_director', true);
+    $release_year = get_post_meta($post->ID, 'movie_release_year', true);
+
+    // Get movie categories
+    $terms = get_terms(array(
+        'taxonomy' => 'movie_category',
+        'hide_empty' => false,
+    ));
+
+    // Get selected category
+    $selected_category = wp_get_post_terms($post->ID, 'movie_category', array('fields' => 'ids'));
+
+    ?>
+    <p>
+        <label for="movie_director">Director:</label><br>
+        <input type="text" name="movie_director" id="movie_director" value="<?php echo esc_attr($director); ?>" size="30">
+    </p>
+    <p>
+        <label for="movie_release_year">Release Year:</label><br>
+        <input type="text" name="movie_release_year" id="movie_release_year" value="<?php echo esc_attr($release_year); ?>" size="30">
+    </p>
+
+    <p>
+        <label for="movie_category">Category:</label><br>
+        <select name="movie_category" id="movie_category">
+            <option value="">Select Category</option>
+            <?php foreach ($terms as $term) : ?>
+                <option value="<?php echo $term->term_id; ?>" 
+                    <?php echo (!empty($selected_category) && in_array($term->term_id, $selected_category)) ? 'selected' : ''; ?>>
+                    <?php echo $term->name; ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+    </p>
+    <?php
+}
+
+function save_movie_meta($post_id) {
+    // if (array_key_exists('movie_director', $_POST)) {
+    //     update_post_meta($post_id, 'movie_director', sanitize_text_field($_POST['movie_director']));
+    // }
+    // if (array_key_exists('movie_release_year', $_POST)) {
+    //     update_post_meta($post_id, 'movie_release_year', sanitize_text_field($_POST['movie_release_year']));
+    // }
+
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!isset($_POST['movie_director']) || !isset($_POST['movie_release_year'])) return;
+
+    // Save Director
+    update_post_meta($post_id, 'movie_director', sanitize_text_field($_POST['movie_director']));
+
+    // Save Release Year
+    update_post_meta($post_id, 'movie_release_year', sanitize_text_field($_POST['movie_release_year']));
+
+    // Save Movie Category
+    if (isset($_POST['movie_category']) && $_POST['movie_category'] != '') {
+        wp_set_post_terms($post_id, array(intval($_POST['movie_category'])), 'movie_category');
+    }
+}
+add_action('save_post', 'save_movie_meta');
