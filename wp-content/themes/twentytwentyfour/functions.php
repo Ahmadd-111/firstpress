@@ -281,26 +281,17 @@ add_action('init', 'create_movie_taxonomies');
 function add_movie_meta_boxes() {
     // add_meta_box('movie_details', 'Movie Details', 'movie_meta_callback', 'movie', 'normal', 'high');
 	add_meta_box(
-        'movie_meta_box', // Meta box ID
-        'Movie Details', // Title
-        'display_movie_meta_box', // Callback function
-        'movie', // Post type
-        'normal', // Context
-        'high' // Priority
+        'movie_meta_box',
+        'Movie Details',
+        'display_movie_meta_box',
+        'movie',
+        'normal',
+        'high'
     );
 }
 add_action('add_meta_boxes', 'add_movie_meta_boxes');
 
 function display_movie_meta_box($post) {
-    // $director = get_post_meta($post->ID, 'movie_director', true);
-    // $release_year = get_post_meta($post->ID, 'movie_release_year', true);
-    
-    // echo '<label>Director:</label>';
-    // echo '<input type="text" name="movie_director" value="' . esc_attr($director) . '" style="width:100%;"><br><br>';
-    
-    // echo '<label>Release Year:</label>';
-    // echo '<input type="number" name="movie_release_year" value="' . esc_attr($release_year) . '" style="width:100%;">';
-
 	// Get saved values (if any)
     $director = get_post_meta($post->ID, 'movie_director', true);
     $release_year = get_post_meta($post->ID, 'movie_release_year', true);
