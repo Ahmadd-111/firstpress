@@ -1,6 +1,6 @@
 wp-admin
 wp-includes
-wp-content/uploads
+wp-content/uploads/
 wp-activate.php
 wp-blog-header.php
 wp-comments-post.php
@@ -15,3 +15,5 @@ wp-settings.php
 wp-signup.php
 wp-trackback.php
 xmlrpc.php
+wp-content/debug.log 
+ 
