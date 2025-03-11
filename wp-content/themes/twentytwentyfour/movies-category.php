@@ -1,4 +1,10 @@
-<?php get_header(); ?>
+<?php
+// Ensure styles and scripts load properly
+wp_head();
+?>
+<header class="wp-block-template-part">
+    <?php echo do_blocks('<!-- wp:template-part {"slug":"header","theme":"twentytwentyfour","tagName":"header"} /-->'); ?>
+</header>
 
 <?php 
 $category = get_queried_object(); 
@@ -17,4 +23,8 @@ echo "<h1>Movies in Category: " . $category->name . "</h1>";
     <p>No movies found in this category.</p>
 <?php endif; ?>
 
-<?php get_footer(); ?>
+<footer class="wp-block-template-part">
+    <?php echo do_blocks('<!-- wp:template-part {"slug":"footer","theme":"twentytwentyfour","tagName":"footer"} /-->'); ?>
+</footer>
+
+<?php wp_footer(); ?>

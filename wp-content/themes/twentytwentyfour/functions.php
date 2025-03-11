@@ -205,6 +205,11 @@ endif;
 
 add_action( 'init', 'twentytwentyfour_pattern_categories' );
 
+function enqueue_twentyfour_styles() {
+    wp_enqueue_style('twentytwentyfour-style', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get('Version'));
+}
+add_action('wp_enqueue_scripts', 'enqueue_twentyfour_styles');
+
 /**
  * Add custom post type for Movies.
  */

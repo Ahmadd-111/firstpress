@@ -1,4 +1,10 @@
-<?php get_header(); ?>
+<?php
+// Ensure styles and scripts load properly
+wp_head();
+?>
+<header class="wp-block-template-part">
+    <?php echo do_blocks('<!-- wp:template-part {"slug":"header","theme":"twentytwentyfour","tagName":"header"} /-->'); ?>
+</header>
 <h1>Movies List</h1>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <div>
@@ -22,4 +28,8 @@
         <?php if (has_post_thumbnail()) { the_post_thumbnail('medium'); } ?>
     </div>
 <?php endwhile; endif; ?>
-<?php get_footer(); ?>
+<footer class="wp-block-template-part">
+    <?php echo do_blocks('<!-- wp:template-part {"slug":"footer","theme":"twentytwentyfour","tagName":"footer"} /-->'); ?>
+</footer>
+
+<?php wp_footer(); ?>

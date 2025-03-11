@@ -1,4 +1,9 @@
-<?php get_header(); ?>
+<?php
+wp_head();
+?>
+<header class="wp-block-template-part">
+    <?php echo do_blocks('<!-- wp:template-part {"slug":"header","theme":"twentytwentyfour","tagName":"header"} /-->'); ?>
+</header>
 <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
     <h1><?php the_title(); ?></h1>
     <p>Director: <?php echo get_post_meta(get_the_ID(), 'movie_director', true); ?></p>
@@ -19,4 +24,8 @@
     <p><?php the_content(); ?></p>
     <?php if (has_post_thumbnail()) { the_post_thumbnail('large'); } ?>
 <?php endwhile; endif; ?>
-<?php get_footer(); ?>
+<footer class="wp-block-template-part">
+    <?php echo do_blocks('<!-- wp:template-part {"slug":"footer","theme":"twentytwentyfour","tagName":"footer"} /-->'); ?>
+</footer>
+
+<?php wp_footer(); ?>
