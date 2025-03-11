@@ -66,6 +66,28 @@ function secure_contact_form_shortcode() {
     ob_start();
     ?>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('form_status')) {
+                let status = urlParams.get('form_status');
+                if (status === 'security_error') {
+                    Swal.fire('Error', 'Security check failed.', 'error');
+                } else if (status === 'empty_fields') {
+                    Swal.fire('Warning', 'All fields are required.', 'warning');
+                } else if (status === 'success') {
+                    Swal.fire('Success', 'Email sent successfully!', 'success').then(() => {
+                        window.location.href = window.location.pathname;
+                    });
+                } else if (status === 'error') {
+                    Swal.fire('Error', 'Email sending failed.', 'error');
+                }
+            }
+        });
+    </script>
+
     <div style="display: flex; justify-content: space-between; align-items: center;">
 
         <div>
@@ -370,21 +392,21 @@ function secure_contact_form_shortcode() {
             <?php wp_nonce_field('secure_contact_form_action', 'secure_contact_form_nonce'); ?>
             <h1 class="title text-center mb-4">Talk to Us</h1>
 
-            <div class="form-group position-relative">
+            <div>
                 <!-- <label for="name" class="d-block">
                     <i class="icon" data-feather="user"></i>
                 </label> -->
                 <input name="name" type="text" id="formName" class="form-control form-control-lg thick" placeholder="Name">
             </div>
 
-            <div class="form-group position-relative">
+            <div>
                 <!-- <label for="email" class="d-block">
                     <i class="icon" data-feather="mail"></i>
                 </label> -->
                 <input name="email" type="email" id="formEmail" class="form-control form-control-lg thick" placeholder="E-mail">
             </div>
 
-            <div class="form-group message">
+            <div class="message">
                 <textarea name="message" id="formMessage" class="form-control form-control-lg" rows="7" placeholder="Message"></textarea>
             </div>
 
@@ -420,9 +442,11 @@ add_shortcode('secure_contact_form', 'secure_contact_form_shortcode');
 
 // Handle Form Submission
 function secure_contact_form_handle_submission() {
-    if (isset($_POST['submit_contact_form'])) {
+    if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submit_contact_form'])) {
         if (!isset($_POST['secure_contact_form_nonce']) || !wp_verify_nonce($_POST['secure_contact_form_nonce'], 'secure_contact_form_action')) {
-            die('Security check failed.');
+            // die('Security check failed.');
+            wp_redirect(add_query_arg('form_status', 'security_error', wp_get_referer()));
+            exit;
         }
 
         $name = sanitize_text_field($_POST['name']);
@@ -430,21 +454,42 @@ function secure_contact_form_handle_submission() {
         $message = sanitize_textarea_field($_POST['message']);
 
         if (empty($name) || empty($email) || empty($message)) {
-            echo '<p style="color:red;">All fields are required.</p>';
-            return;
+            // echo '<p style="color:red;">All fields are required.</p>';
+            // return;
+            wp_redirect(add_query_arg('form_status', 'empty_fields', wp_get_referer()));
+            exit;
         }
 
         $to = get_option('admin_email');
         $subject = 'New Contact Form Message';
+        $message = "Name: $name\nEmail: $email\nMessage: $message";
         $headers = "From: $name <$email>\r\n";
 
         if (wp_mail($to, $subject, $message, $headers)) {
-            echo '<p style="color:green;">Message sent successfully!</p>';
+            // echo '<p style="color:green;">Message sent successfully!</p>';
+            wp_redirect(add_query_arg('form_status', 'success', wp_get_referer()));
+            exit;
         } else {
-            echo '<p style="color:red;">Message sending failed.</p>';
+            // echo '<p style="color:red;">Message sending failed.</p>';
+            wp_redirect(add_query_arg('form_status', 'error', wp_get_referer()));
+            exit;
         }
     }
 }
 add_action('init', 'secure_contact_form_handle_submission');
+
+function configure_smtp_mailtrap($phpmailer) {
+    $phpmailer->isSMTP();
+    $phpmailer->Host = 'sandbox.smtp.mailtrap.io';
+    $phpmailer->SMTPAuth = true;
+    $phpmailer->Port = 2525;
+    $phpmailer->Username = 'a6379e649fbe2c';
+    $phpmailer->Password = '0d3af7aa07cc2a';
+    $phpmailer->SMTPSecure = 'tls';
+    $phpmailer->From = 'contact@firstpress.com';
+    $phpmailer->FromName = 'Firstpress';
+}
+add_action('phpmailer_init', 'configure_smtp_mailtrap');
+
 
 
