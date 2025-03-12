@@ -44,9 +44,41 @@ function secure_contact_form_menu() {
         'Contact Form',
         'manage_options',
         'secure-contact-form',
-        'secure_contact_form_admin_page',
+        'secure_contact_form_dashboard',
         'dashicons-email',
         25
+    );
+    add_submenu_page(
+        'secure-contact-form',
+        'Dashboard',
+        'Dashboard',
+        'manage_options',
+        'secure-contact-form',
+        'secure_contact_form_dashboard'
+    );
+    add_submenu_page(
+        'secure-contact-form',
+        'Form Submissions',
+        'Submissions',
+        'manage_options',
+        'secure-contact-form-submissions',
+        'secure_contact_form_submissions'
+    );
+    add_submenu_page(
+        'secure-contact-form',
+        'Settings',
+        'Settings',
+        'manage_options',
+        'secure-contact-form-settings',
+        'secure_contact_form_settings'
+    );
+    add_submenu_page(
+        'secure-contact-form',
+        'Send Test Email',
+        'Send Test Email',
+        'manage_options',
+        'secure-contact-form-send-test',
+        'secure_contact_form_send_test_email'
     );
 }
 add_action('admin_menu', 'secure_contact_form_menu');
@@ -60,6 +92,46 @@ function secure_contact_form_admin_page() {
     </div>
     <?php
 }
+
+function secure_contact_form_dashboard() {
+    ?>
+    <div class="wrap">
+        <h1>Contact Form Dashboard</h1>
+        <p>Welcome to the Secure Contact Form plugin dashboard.</p>
+        <p>Use the shortcode <code>[secure_contact_form]</code> to display the form.</p>
+    </div>
+    <?php
+}
+
+// Form Submissions Page
+function secure_contact_form_submissions() {
+    ?>
+    <div class="wrap">
+        <h1>Form Submissions</h1>
+        <p>Here, you will see the list of submitted messages.</p>
+    </div>
+    <?php
+}
+
+// Settings Page
+function secure_contact_form_settings() {
+    ?>
+    <div class="wrap">
+        <h1>Contact Form Settings</h1>
+        <p>Configure your form settings here.</p>
+    </div>
+    <?php
+}
+
+function secure_contact_form_send_test_email() {
+    ?>
+    <div class="wrap">
+        <h1>Contact Form</h1>
+        <p>On submit email is sent with the provided data to the contact mail.</p>
+    </div>
+    <?php
+}
+
 
 // Shortcode to Display Form
 function secure_contact_form_shortcode() {
@@ -416,25 +488,6 @@ function secure_contact_form_shortcode() {
         </form>
 
     </div>
-
-    <!-- <form method="post" action="" class="secure-contact-form">
-        <?php wp_nonce_field('secure_contact_form_action', 'secure_contact_form_nonce'); ?>
-        <p>
-            <label for="name">Name :</label>
-            <input class="form-control" type="text" name="name">
-        </p>
-        <p>
-            <label for="email">Email :</label>
-            <input class="form-control" type="email" name="email">
-        </p>
-        <p>
-            <label for="message">Message :</label>
-            <textarea class="form-control" name="message"></textarea>
-        </p>
-        <p>
-            <input type="submit" name="submit_contact_form" value="Send Message">
-        </p>
-    </form> -->
     <?php
     return ob_get_clean();
 }
@@ -490,6 +543,88 @@ function configure_smtp_mailtrap($phpmailer) {
     $phpmailer->FromName = 'Firstpress';
 }
 add_action('phpmailer_init', 'configure_smtp_mailtrap');
+
+function add_contact_form_button_to_admin_bar($wp_admin_bar) {
+    if (!is_admin_bar_showing()) {
+        return;
+    }
+    $contact_form_url = 'http://localhost/firstpress/index.php/contact-form/';
+    $current_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+    if ($current_url === $contact_form_url) {
+        return;
+    }
+    $wp_admin_bar->add_node([
+        'id'    => 'contact_form_button',
+        'title' => '<span style="background: #fff; color: #363b3f; padding: 5px 10px; border-radius: 5px; font-weight: bold;">📩 Go to Contact Form</span>',
+        'href'  => $contact_form_url,
+        'parent' => false,
+        'meta'  => [
+            'class' => 'contact-form-button',
+            'title' => 'Go to Contact Form Page'
+        ]
+    ]);
+}
+add_action('admin_bar_menu', 'add_contact_form_button_to_admin_bar', 200);
+
+function customize_admin_bar($wp_admin_bar) {
+    $wp_admin_bar->add_node([
+        'id'    => 'quick_links',
+        'title' => 'Quick Links',
+        'href'  => '#',
+    ]);
+    $wp_admin_bar->add_node([
+        'id'     => 'quick_links_dashboard',
+        'title'  => 'Dashboard',
+        'href'   => admin_url(),
+        'parent' => 'quick_links',
+    ]);
+    $wp_admin_bar->add_node([
+        'id'     => 'quick_links_plugins',
+        'title'  => 'Plugins',
+        'href'   => admin_url('plugins.php'),
+        'parent' => 'quick_links',
+    ]);
+}
+add_action('admin_bar_menu', 'customize_admin_bar', 100);
+
+function add_custom_dashboard_widget() {
+    wp_add_dashboard_widget(
+        'custom_dashboard_widget',
+        'Firstpress Custom Widget',
+        'custom_dashboard_widget_content'
+    );
+}
+add_action('wp_dashboard_setup', 'add_custom_dashboard_widget');
+
+function custom_dashboard_widget_content() {
+    echo '<h3>Welcome to the Firstpress Dashboard!</h3>';
+    echo '<p>This is a widget for custom dashboard.</p>';
+}
+
+function add_custom_text_to_content($content) {
+    if (is_single()) { 
+        $content .= '<div style="background-color: #e0e0e0; color: #1d2327; padding: 15px; margin-top: 50px; text-align: center; font-size: 18px; width: 100%; box-sizing: border-box;">
+            Custom Content : Thank you for reading!
+        </div>';
+    }
+    return $content;
+}
+add_filter('the_content', 'add_custom_text_to_content');
+
+function insert_ad_after_first_paragraph($content) {
+    if (is_single()) {
+        $ad_code = '<div style="background:#e0e0e0; padding:10px; text-align:center;">📢 <strong>Special Offer:</strong> Get 50% off!</div>';
+        $paragraphs = explode('</p>', $content);
+        if (isset($paragraphs[1])) {
+            $paragraphs[1] .= $ad_code;
+        }
+        $content = implode('</p>', $paragraphs);
+    }
+    return $content;
+}
+add_filter('the_content', 'insert_ad_after_first_paragraph');
+
 
 
 
