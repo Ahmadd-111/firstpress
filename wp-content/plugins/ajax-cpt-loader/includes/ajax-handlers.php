@@ -1,39 +1,74 @@
 <?php
-function ajax_cpt_loader_fetch_books() {
-    check_ajax_referer('ajax_cpt_nonce', 'security');
+// Fetch Books
+// function fetch_books_ajax() {
+//     $query = new WP_Query(array('post_type' => 'book', 'posts_per_page' => -1));
+//     if ($query->have_posts()) :
+//         while ($query->have_posts()) : $query->the_post();
+//             $id = get_the_ID();
+//             $title = get_the_title();
+//             $content = get_the_content();
+//             $genre = get_the_terms($id, 'genre') ? wp_list_pluck(get_the_terms($id, 'genre'), 'name') : array();
 
-    $query = new WP_Query(['post_type' => 'book', 'posts_per_page' => -1]);
-    if ($query->have_posts()) {
-        while ($query->have_posts()) {
-            $query->the_post();
-            echo '<div class="book-item" data-id="' . get_the_ID() . '">';
-            echo '<h3>' . get_the_title() . '</h3>';
-            echo '<button class="edit-book">Edit</button>';
-            echo '</div>';
-        }
-    } else {
-        echo 'No books found.';
-    }
+//             echo "<div class='book-item' data-id='$id'>
+//                     <h3>$title</h3>
+//                     <p>$content</p>
+//                     <p><strong>Genre:</strong> " . implode(', ', $genre) . "</p>
+//                     <button class='view-book' data-slug='" . get_post_field('post_name', $id) . "'>View</button>
+//                 </div>";
+//         endwhile;
+//         wp_reset_postdata();
+//     else:
+//         echo '<p>No books found.</p>';
+//     endif;
+
+//     wp_die();
+// }
+
+// Fetch Books
+function fetch_books_ajax() {
+    $query = new WP_Query(array('post_type' => 'book', 'posts_per_page' => -1));
+    if ($query->have_posts()) :
+        while ($query->have_posts()) : $query->the_post();
+            $id = get_the_ID();
+            $title = get_the_title();
+            $content = get_the_content();
+            $slug = get_post_field('post_name', $id); // Get the slug
+            $genre = get_the_terms($id, 'genre') ? wp_list_pluck(get_the_terms($id, 'genre'), 'name') : array();
+
+            echo "<div class='book-item' data-id='$id'>
+                    <h3>$title</h3>
+                    <p>$content</p>
+                    <p><strong>Genre:</strong> " . implode(', ', $genre) . "</p>
+                    <button class='view-book' data-slug='$slug'>View</button>
+                </div>";
+        endwhile;
+        wp_reset_postdata();
+    else:
+        echo '<p>No books found.</p>';
+    endif;
+
     wp_die();
 }
-add_action('wp_ajax_ajax_cpt_loader_fetch_books', 'ajax_cpt_loader_fetch_books');
+add_action('wp_ajax_fetch_books', 'fetch_books_ajax');
+add_action('wp_ajax_nopriv_fetch_books', 'fetch_books_ajax');
 
-function ajax_cpt_loader_update_book() {
-    check_ajax_referer('ajax_cpt_nonce', 'security');
+// Update Book
+function update_book_ajax() {
+    $post_id = intval($_POST['id']);
+    $title = sanitize_text_field($_POST['title']);
+    $content = sanitize_textarea_field($_POST['content']);
 
-    $book_id = intval($_POST['book_id']);
-    $new_title = sanitize_text_field($_POST['new_title']);
+    wp_update_post([
+        'ID' => $post_id,
+        'post_title' => $title,
+        'post_content' => $content
+    ]);
 
-    if ($book_id && $new_title) {
-        wp_update_post([
-            'ID'         => $book_id,
-            'post_title' => $new_title,
-        ]);
-        echo 'Book updated!';
-    } else {
-        echo 'Failed to update.';
-    }
+    echo "Book Updated Successfully!";
     wp_die();
 }
-add_action('wp_ajax_ajax_cpt_loader_update_book', 'ajax_cpt_loader_update_book');
+add_action('wp_ajax_update_book', 'update_book_ajax');
+add_action('wp_ajax_nopriv_update_book', 'update_book_ajax');
 
+
+?>

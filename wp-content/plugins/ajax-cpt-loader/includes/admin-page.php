@@ -1,23 +1,14 @@
 <?php
-function ajax_cpt_loader_admin_menu() {
-    add_menu_page(
-        'AJAX CPT Loader',
-        'AJAX CPT Loader',
-        'manage_options',
-        'ajax_cpt_loader',
-        'ajax_cpt_loader_admin_page',
-        'dashicons-book',
-        20
-    );
-}
-add_action('admin_menu', 'ajax_cpt_loader_admin_menu');
-
-function ajax_cpt_loader_admin_page() {
-?>
-    <div class="wrap">
-        <h1>Manage Books</h1>
+// Shortcode to Display Book List
+function ajax_books_list_shortcode() {
+    ob_start();
+    ?>
+    <div id="book-listing">
         <button id="load-books">Load Books</button>
-        <div id="book-list"></div>
+        <div id="books-container"></div>
     </div>
-<?php
+    <?php
+    return ob_get_clean();
 }
+add_shortcode('ajax_books_list', 'ajax_books_list_shortcode');
+?>
