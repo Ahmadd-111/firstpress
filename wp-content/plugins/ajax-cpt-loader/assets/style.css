@@ -1,0 +1,16 @@
+.book-item {
+    background: #f9f9f9;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+}
+.edit-book {
+    background: #0073aa;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.edit-book:hover {
+    background: #005177;
+}
