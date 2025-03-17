@@ -11,3 +11,9 @@
 [13-Mar-2025 11:02:56 UTC] Automatic updates starting...
 [13-Mar-2025 11:02:57 UTC] Automatic updates complete.
 [13-Mar-2025 15:51:38 UTC] PHP Notice:  Function map_meta_cap was called <strong>incorrectly</strong>. The post type <code>book</code> is not registered, so it may not be reliable to check the capability <code>edit_post</code> against a post of that type. Please see <a href="https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/">Debugging in WordPress</a> for more information. (This message was added in version 4.4.0.) in C:\xampp8.2.12\htdocs\firstpress\wp-includes\functions.php on line 6114
+[17-Mar-2025 06:17:29 UTC] Automatic updates starting...
+[17-Mar-2025 06:17:34 UTC] Automatic updates complete.
+[17-Mar-2025 11:12:35 UTC] Automatic updates starting...
+[17-Mar-2025 11:12:38 UTC] Automatic updates complete.
+[17-Mar-2025 11:57:28 UTC] PHP Deprecated:  File Theme without header.php is <strong>deprecated</strong> since version 3.0.0 with no alternative available. Please include a header.php template in your theme. in C:\xampp8.2.12\htdocs\firstpress\wp-includes\functions.php on line 6114
+[17-Mar-2025 11:57:28 UTC] PHP Deprecated:  File Theme without footer.php is <strong>deprecated</strong> since version 3.0.0 with no alternative available. Please include a footer.php template in your theme. in C:\xampp8.2.12\htdocs\firstpress\wp-includes\functions.php on line 6114

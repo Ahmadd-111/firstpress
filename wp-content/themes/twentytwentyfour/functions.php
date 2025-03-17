@@ -195,7 +195,7 @@ if ( ! function_exists( 'twentytwentyfour_pattern_categories' ) ) :
 
 		register_block_pattern_category(
 			'twentytwentyfour_page',
-			array(
+			array( 
 				'label'       => _x( 'Pages', 'Block pattern category', 'twentytwentyfour' ),
 				'description' => __( 'A collection of full page layouts.', 'twentytwentyfour' ),
 			)
@@ -358,3 +358,22 @@ function save_movie_meta($post_id) {
     }
 }
 add_action('save_post', 'save_movie_meta');
+
+function custom_edit_book_rewrite_rule() {
+    add_rewrite_rule('^edit-book/?$', 'index.php?edit_book_page=1', 'top');
+}
+add_action('init', 'custom_edit_book_rewrite_rule');
+
+function custom_edit_book_query_vars($query_vars) {
+    $query_vars[] = 'edit_book_page';
+    return $query_vars;
+}
+add_filter('query_vars', 'custom_edit_book_query_vars');
+
+function custom_edit_book_template_include($template) {
+    if (get_query_var('edit_book_page') == 1) {
+        return get_template_directory() . '/edit-book.php';
+    }
+    return $template;
+}
+add_filter('template_include', 'custom_edit_book_template_include');

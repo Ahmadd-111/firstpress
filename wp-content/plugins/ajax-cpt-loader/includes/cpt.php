@@ -15,10 +15,10 @@ function create_books_cpt() {
         ),
         'public' => true,
         'has_archive' => true,
-        'menu_icon' => 'dashicons-book', // Icon for better UI
+        'menu_icon' => 'dashicons-book',
         'supports' => array('title', 'editor', 'author', 'thumbnail', 'custom-fields'),
         'rewrite' => array('slug' => 'book', 'with_front' => false),
-        'show_in_rest' => true, // Enable Gutenberg support
+        'show_in_rest' => true,
     ));
 
     // Register Genre Taxonomy
@@ -26,7 +26,7 @@ function create_books_cpt() {
         'label' => 'Genre',
         'rewrite' => array('slug' => 'genre'),
         'hierarchical' => true,
-        'show_admin_column' => true, // Display in book editor sidebar
+        'show_admin_column' => true,
         'show_in_rest' => true,
     ));
 }

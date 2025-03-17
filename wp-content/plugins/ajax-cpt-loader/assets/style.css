@@ -1,16 +1,23 @@
-.book-item {
-    background: #f9f9f9;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ddd;
-}
-.edit-book {
-    background: #0073aa;
+#ajax-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #28a745; /* Green for success */
     color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    z-index: 9999;
+    transition: opacity 0.5s ease-in-out;
 }
-.edit-book:hover {
-    background: #005177;
+
+#ajax-notification.error {
+    background-color: #dc3545; /* Red for errors */
+}
+
+#ajax-notification.show {
+    display: block;
+    opacity: 1;
 }
