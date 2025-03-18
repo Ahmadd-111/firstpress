@@ -284,7 +284,6 @@ endif;
 add_action('init', 'create_movie_taxonomies');
 
 function add_movie_meta_boxes() {
-    // add_meta_box('movie_details', 'Movie Details', 'movie_meta_callback', 'movie', 'normal', 'high');
 	add_meta_box(
         'movie_meta_box',
         'Movie Details',
@@ -297,17 +296,14 @@ function add_movie_meta_boxes() {
 add_action('add_meta_boxes', 'add_movie_meta_boxes');
 
 function display_movie_meta_box($post) {
-	// Get saved values (if any)
     $director = get_post_meta($post->ID, 'movie_director', true);
     $release_year = get_post_meta($post->ID, 'movie_release_year', true);
 
-    // Get movie categories
     $terms = get_terms(array(
         'taxonomy' => 'movie_category',
         'hide_empty' => false,
     ));
 
-    // Get selected category
     $selected_category = wp_get_post_terms($post->ID, 'movie_category', array('fields' => 'ids'));
 
     ?>
@@ -336,23 +332,13 @@ function display_movie_meta_box($post) {
 }
 
 function save_movie_meta($post_id) {
-    // if (array_key_exists('movie_director', $_POST)) {
-    //     update_post_meta($post_id, 'movie_director', sanitize_text_field($_POST['movie_director']));
-    // }
-    // if (array_key_exists('movie_release_year', $_POST)) {
-    //     update_post_meta($post_id, 'movie_release_year', sanitize_text_field($_POST['movie_release_year']));
-    // }
-
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
     if (!isset($_POST['movie_director']) || !isset($_POST['movie_release_year'])) return;
 
-    // Save Director
     update_post_meta($post_id, 'movie_director', sanitize_text_field($_POST['movie_director']));
 
-    // Save Release Year
     update_post_meta($post_id, 'movie_release_year', sanitize_text_field($_POST['movie_release_year']));
 
-    // Save Movie Category
     if (isset($_POST['movie_category']) && $_POST['movie_category'] != '') {
         wp_set_post_terms($post_id, array(intval($_POST['movie_category'])), 'movie_category');
     }

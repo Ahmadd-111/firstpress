@@ -13,3 +13,240 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: twentytwentyfour
 Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, featured-images, full-site-editing, block-patterns, rtl-language-support, sticky-post, threaded-comments, translation-ready, wide-blocks, block-styles, style-variations, accessibility-ready, blog, portfolio, news
 */
+
+.single-book-wrapper {
+    width: 100%;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+    background: #EEEEEE;
+}
+
+.single-book-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.book-cover {
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 40px;
+}
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.book-details {
+    width: 100%;
+    background: #ffffff;
+    padding: 0px;
+    border-radius: 10px;
+}
+
+.book-title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 0px 30px;
+}
+.book-title {
+    font-size: 28px;
+    font-weight: bold;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 70%;
+}
+
+.edit-book-btn {
+    padding: 14px 30px;
+    font-size: 16px;
+    min-width: 150px;
+    border: none;
+    background: #0073aa;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    text-align: center;
+}
+.edit-book-btn:hover {
+    background: #002D62;
+}
+
+.book-genre {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+}
+
+.book-genre strong {
+    background: #FFA725;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.book-genre span {
+    background: #EEEEEE;
+    padding: 5px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+.book-content {
+    padding: 0px 30px;
+    text-align: left;
+    font-size: 18px;
+    line-height: 1.8;
+    margin-top: 30px;
+}
+
+/* Wrapper for Full Page */
+.edit-book-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 40px 0;
+    background: #EEEEEE;
+    justify-content: center;
+}
+
+.edit-book-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 900px;
+    padding: 20px 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 50px;
+}
+
+.edit-book-title {
+    flex: 1;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.back-button, .listing-button {
+    padding: 10px 15px;
+    font-size: 16px;
+    background: #0073aa;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.back-button:hover, .listing-button:hover {
+    background: #005f8d;
+}
+
+.edit-book-container {
+    max-width: 900px;
+    width: 100%;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    margin-top: 10px;
+}
+
+.edit-book-container h1 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.edit-book-container label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.edit-book-container input,
+.edit-book-container textarea,
+.edit-book-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc !important;
+    border-radius: 5px;
+    outline: none;
+}
+
+.edit-book-container textarea {
+    height: 280px;
+    resize: vertical;
+}
+
+.edit-book-container button {
+    width: 100%;
+    padding: 12px;
+    background: #0073aa;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 30px;
+}
+
+.edit-book-container button:hover {
+    background: #005f8d;
+}
+
+.error-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    max-width: 900px;
+    margin: 50px auto;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+
+
+
+

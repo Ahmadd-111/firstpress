@@ -602,19 +602,19 @@ function custom_dashboard_widget_content() {
     echo '<p>This is a widget for custom dashboard.</p>';
 }
 
-function add_custom_text_to_content($content) {
-    if (is_single()) { 
-        $content .= '<div style="background-color: #e0e0e0; color: #1d2327; padding: 15px; margin-top: 50px; text-align: center; font-size: 18px; width: 100%; box-sizing: border-box;">
-            Custom Content : Thank you for reading!
-        </div>';
-    }
-    return $content;
-}
-add_filter('the_content', 'add_custom_text_to_content');
+// function add_custom_text_to_content($content) {
+//     if (is_single()) { 
+//         $content .= '<div style="background-color: #e0e0e0; color: #1d2327; padding: 15px; margin-top: 50px; text-align: center; font-size: 18px; width: 100%; box-sizing: border-box;">
+//             Custom Content : Thank you for reading!
+//         </div>';
+//     }
+//     return $content;
+// }
+// add_filter('the_content', 'add_custom_text_to_content');
 
 function insert_ad_after_first_paragraph($content) {
     if (is_single()) {
-        $ad_code = '<div style="background:#e0e0e0; padding:10px; text-align:center;">📢 <strong>Special Offer:</strong> Get 50% off!</div>';
+        $ad_code = '<div style="background:#EEEEEE; padding:15px; text-align:center; margin-top: 50px;">📢 <strong>Special Offer:</strong> Get 50% off!</div>';
         $paragraphs = explode('</p>', $content);
         if (isset($paragraphs[1])) {
             $paragraphs[1] .= $ad_code;

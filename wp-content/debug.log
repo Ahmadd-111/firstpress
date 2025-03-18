@@ -17,3 +17,71 @@
 [17-Mar-2025 11:12:38 UTC] Automatic updates complete.
 [17-Mar-2025 11:57:28 UTC] PHP Deprecated:  File Theme without header.php is <strong>deprecated</strong> since version 3.0.0 with no alternative available. Please include a header.php template in your theme. in C:\xampp8.2.12\htdocs\firstpress\wp-includes\functions.php on line 6114
 [17-Mar-2025 11:57:28 UTC] PHP Deprecated:  File Theme without footer.php is <strong>deprecated</strong> since version 3.0.0 with no alternative available. Please include a footer.php template in your theme. in C:\xampp8.2.12\htdocs\firstpress\wp-includes\functions.php on line 6114
+[17-Mar-2025 23:04:15 UTC] Automatic updates starting...
+[17-Mar-2025 23:04:18 UTC] Automatic updates complete.
+[18-Mar-2025 08:29:23 UTC] PHP Warning:  Array to string conversion in C:\xampp8.2.12\htdocs\firstpress\wp-includes\formatting.php on line 1096
+[18-Mar-2025 11:02:53 UTC] Automatic updates starting...
+[18-Mar-2025 11:02:57 UTC] Automatic updates complete.
+[18-Mar-2025 11:10:14 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, string given in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php:72
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php(72): array_map('intval', '25')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): update_book_ajax('')
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(192): do_action('wp_ajax_update_...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php on line 72
+[18-Mar-2025 12:20:28 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, string given in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php:72
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php(72): array_map('intval', '25')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): update_book_ajax('')
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(192): do_action('wp_ajax_update_...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php on line 72
+[18-Mar-2025 12:22:01 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, string given in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php:72
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php(72): array_map('intval', '25')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): update_book_ajax('')
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(192): do_action('wp_ajax_update_...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php on line 72
+[18-Mar-2025 12:22:28 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, string given in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php:72
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php(72): array_map('intval', '25')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): update_book_ajax('')
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(192): do_action('wp_ajax_update_...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php on line 72
+[18-Mar-2025 15:00:14 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, string given in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php:72
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php(72): array_map('intval', '25')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): update_book_ajax('')
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(192): do_action('wp_ajax_update_...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php on line 72
+[18-Mar-2025 15:05:04 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, string given in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php:72
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php(72): array_map('intval', '25')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): update_book_ajax('')
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(192): do_action('wp_ajax_update_...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php on line 72
+[18-Mar-2025 15:11:44 UTC] PHP Fatal error:  Uncaught TypeError: array_map(): Argument #2 ($array) must be of type array, string given in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php:72
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php(72): array_map('intval', '25')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): update_book_ajax('')
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters('', Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(192): do_action('wp_ajax_update_...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\includes\ajax-handlers.php on line 72
