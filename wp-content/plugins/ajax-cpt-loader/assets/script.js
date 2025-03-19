@@ -35,10 +35,7 @@ jQuery(document).ready(function ($) {
             alert('Error: Book slug is missing.');
         }
     });
-    
-});
 
-jQuery(document).ready(function ($) {
     $('#edit-book-form').on('submit', function (e) {
         e.preventDefault();
 
@@ -90,15 +87,6 @@ jQuery(document).ready(function ($) {
         });
     });
 
-    // function showNotification(message, type) {
-    //     var notification = $('#ajax-notification');
-    //     notification.removeClass('error success').addClass(type).text(message).fadeIn();
-
-    //     setTimeout(function () {
-    //         notification.fadeOut();
-    //     }, 2000);
-    // }
-
     function showNotification(message, type) {
         var notification = $('#ajax-notification');
     
@@ -109,5 +97,28 @@ jQuery(document).ready(function ($) {
             notification.removeClass('show');
         }, 3000);
     }
+
+    $(document).on('click', '.fetch-book-api', function () {
+        var bookId = $(this).data('id');
+
+        if (bookId) {
+            $.ajax({
+                url: '/firstpress/wp-json/custom/v1/book/' + bookId,
+                type: 'GET',
+                success: function (data) {
+                    if (data) {
+                        console.log("API Response: ", data);
+                    } else {
+                        console.log("API Response error: ", data);
+                    }
+                },
+                error: function () {
+                    alert('Error fetching book details.');
+                }
+            });
+        } else {
+            alert('Error: Book ID is missing.');
+        }
+    });
     
 });

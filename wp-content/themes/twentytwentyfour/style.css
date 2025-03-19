@@ -245,6 +245,23 @@ Tags: one-column, custom-colors, custom-menu, custom-logo, editor-style, feature
     font-weight: bold;
 }
 
+.edit-book-api-btn {
+    padding: 14px 30px;
+    font-size: 16px;
+    min-width: 150px;
+    border: 1px solid #0073aa;
+    background: white;
+    color: black;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    text-align: center;
+}
+
+.edit-book-api-btn:hover {
+    background: #005f8d;
+    color: white;
+}
 
 
 
