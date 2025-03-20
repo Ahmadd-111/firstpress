@@ -363,3 +363,44 @@ function custom_edit_book_template_include($template) {
     return $template;
 }
 add_filter('template_include', 'custom_edit_book_template_include');
+
+function modify_robots_meta_for_non_fiction() {
+    if (!is_single()) {
+        return;
+    }
+    
+	global $post;
+	if (get_post_type($post) !== 'book') {
+        return;
+    }
+	
+	$genres = wp_get_post_terms($post->ID, 'genre', array('fields' => 'names'));
+    if (empty($genres)) {
+        return; 
+    }
+
+    $is_non_fiction = false;
+    foreach ($genres as $genre) {
+        if ($genre === 'Non-Fiction' || term_is_ancestor_of(get_term_by('name', 'Non-Fiction', 'genre')->term_id, get_term_by('name', $genre, 'genre')->term_id, 'genre')) {
+            $is_non_fiction = true;
+            break;
+        }
+    }
+
+    if ($is_non_fiction) {
+        echo '<script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let robotsMeta = document.querySelector("meta[name=\'robots\']");
+                if (robotsMeta) {
+                    robotsMeta.setAttribute("content", "no-index");
+                } else {
+                    let metaTag = document.createElement("meta");
+                    metaTag.name = "robots";
+                    metaTag.content = "no-index";
+                    document.head.appendChild(metaTag);
+                }
+            });
+        </script>';
+    }
+}
+add_action('wp_head', 'modify_robots_meta_for_non_fiction');

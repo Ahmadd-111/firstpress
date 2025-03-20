@@ -93,3 +93,29 @@ Stack trace:
 [19-Mar-2025 11:10:44 UTC]   Automatic plugin updates starting...
 [19-Mar-2025 11:10:44 UTC]   Automatic plugin updates complete.
 [19-Mar-2025 11:10:45 UTC] Automatic updates complete.
+[20-Mar-2025 06:12:56 UTC] Automatic updates starting...
+[20-Mar-2025 06:12:58 UTC]   Automatic plugin updates starting...
+[20-Mar-2025 06:12:58 UTC]   Automatic plugin updates complete.
+[20-Mar-2025 06:12:59 UTC] Automatic updates complete.
+[20-Mar-2025 11:51:25 UTC] Automatic updates starting...
+[20-Mar-2025 11:51:26 UTC]   Automatic plugin updates starting...
+[20-Mar-2025 11:51:26 UTC]   Automatic plugin updates complete.
+[20-Mar-2025 11:51:27 UTC] Automatic updates complete.
+[20-Mar-2025 16:05:02 UTC] PHP Warning:  Array to string conversion in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\ajax-cpt-loader.php on line 75
+[20-Mar-2025 16:09:43 UTC] PHP Fatal error:  Uncaught Error: Object of class WP_Post could not be converted to string in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\ajax-cpt-loader.php:76
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): modify_robots_meta_for_non_fiction('')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-includes\general-template.php(3064): do_action('wp_head')
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\single-book.php(5): wp_head()
+#5 C:\xampp8.2.12\htdocs\firstpress\wp-includes\template-loader.php(106): include('C:\\xampp8.2.12\\...')
+#6 C:\xampp8.2.12\htdocs\firstpress\wp-blog-header.php(19): require_once('C:\\xampp8.2.12\\...')
+#7 C:\xampp8.2.12\htdocs\firstpress\index.php(17): require('C:\\xampp8.2.12\\...')
+#8 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\plugins\ajax-cpt-loader\ajax-cpt-loader.php on line 76
+[20-Mar-2025 16:18:50 UTC] Genres found: Array
+(
+    [0] => Science
+)
+
