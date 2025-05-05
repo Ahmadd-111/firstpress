@@ -1,0 +1,26 @@
+{
+    "name": "ahmadd-111/firstpress",
+    "type": "project",
+    "require": {
+      "composer/installers": "^2.3",
+      "ahmadd-111/wp-hello-world-plugin": "^v1.0.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        }
+    },
+    "repositories": [
+      {
+        "type": "vcs",
+        "url": "https://github.com/ahmadd-111/wp-hello-world-plugin"
+      }
+    ],
+    "extra": {
+      "installer-paths": {
+        "wp-content/plugins/{$name}/": ["type:wordpress-plugin"]
+      }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

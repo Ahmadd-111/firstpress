@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => 'ahmadd-111/firstpress',
+        'pretty_version' => 'dev-develop',
+        'version' => 'dev-develop',
+        'reference' => '66cf9e478cc5c60cf7c2b2ca344ae6f79293cd9a',
+        'type' => 'project',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        'ahmadd-111/firstpress' => array(
+            'pretty_version' => 'dev-develop',
+            'version' => 'dev-develop',
+            'reference' => '66cf9e478cc5c60cf7c2b2ca344ae6f79293cd9a',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'ahmadd-111/wp-hello-world-plugin' => array(
+            'pretty_version' => 'v1.0.2',
+            'version' => '1.0.2.0',
+            'reference' => 'bfe6a93cefb6dc98aeaf856a27c473dc5d0563b9',
+            'type' => 'wordpress-plugin',
+            'install_path' => __DIR__ . '/../../wp-content/plugins/wp-hello-world-plugin',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'composer/installers' => array(
+            'pretty_version' => 'v2.3.0',
+            'version' => '2.3.0.0',
+            'reference' => '12fb2dfe5e16183de69e784a7b84046c43d97e8e',
+            'type' => 'composer-plugin',
+            'install_path' => __DIR__ . '/./installers',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);
