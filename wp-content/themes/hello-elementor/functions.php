@@ -279,11 +279,3 @@ function hello_elementor_get_theme_notifications(): ThemeNotifications {
 
 	return $notifications;
 }
-
-hello_elementor_get_theme_notifications();
-
-function change_search_form_method_to_post($form) {
-    $form = str_replace('method="get"', 'method="post"', $form);
-    return $form;
-}
-add_filter('get_search_form', 'change_search_form_method_to_post');

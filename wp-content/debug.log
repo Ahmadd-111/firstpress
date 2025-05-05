@@ -327,3 +327,9 @@ Stack trace:
 [05-May-2025 12:37:20 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
 [05-May-2025 12:37:32 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
 [05-May-2025 12:37:34 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 15:25:32 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 569
+[05-May-2025 15:25:32 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 569
+[05-May-2025 15:28:03 UTC] PHP Deprecated:  File Theme without header.php is <strong>deprecated</strong> since version 3.0.0 with no alternative available. Please include a header.php template in your theme. in C:\xampp8.2.12\htdocs\firstpress\wp-includes\functions.php on line 6114
+[05-May-2025 15:28:03 UTC] PHP Warning:  Undefined variable $bimber_searchform in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\searchform.php on line 24
+[05-May-2025 15:28:03 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\searchform.php on line 24
+[05-May-2025 15:28:03 UTC] PHP Deprecated:  File Theme without footer.php is <strong>deprecated</strong> since version 3.0.0 with no alternative available. Please include a footer.php template in your theme. in C:\xampp8.2.12\htdocs\firstpress\wp-includes\functions.php on line 6114
