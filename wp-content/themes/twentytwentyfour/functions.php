@@ -195,7 +195,7 @@ if ( ! function_exists( 'twentytwentyfour_pattern_categories' ) ) :
 
 		register_block_pattern_category(
 			'twentytwentyfour_page',
-			array(
+			array( 
 				'label'       => _x( 'Pages', 'Block pattern category', 'twentytwentyfour' ),
 				'description' => __( 'A collection of full page layouts.', 'twentytwentyfour' ),
 			)
@@ -204,6 +204,11 @@ if ( ! function_exists( 'twentytwentyfour_pattern_categories' ) ) :
 endif;
 
 add_action( 'init', 'twentytwentyfour_pattern_categories' );
+
+function enqueue_twentyfour_styles() {
+    wp_enqueue_style('twentytwentyfour-style', get_template_directory_uri() . '/style.css', array(), wp_get_theme()->get('Version'));
+}
+add_action('wp_enqueue_scripts', 'enqueue_twentyfour_styles');
 
 /**
  * Add custom post type for Movies.
@@ -279,7 +284,6 @@ endif;
 add_action('init', 'create_movie_taxonomies');
 
 function add_movie_meta_boxes() {
-    // add_meta_box('movie_details', 'Movie Details', 'movie_meta_callback', 'movie', 'normal', 'high');
 	add_meta_box(
         'movie_meta_box',
         'Movie Details',
@@ -292,17 +296,14 @@ function add_movie_meta_boxes() {
 add_action('add_meta_boxes', 'add_movie_meta_boxes');
 
 function display_movie_meta_box($post) {
-	// Get saved values (if any)
     $director = get_post_meta($post->ID, 'movie_director', true);
     $release_year = get_post_meta($post->ID, 'movie_release_year', true);
 
-    // Get movie categories
     $terms = get_terms(array(
         'taxonomy' => 'movie_category',
         'hide_empty' => false,
     ));
 
-    // Get selected category
     $selected_category = wp_get_post_terms($post->ID, 'movie_category', array('fields' => 'ids'));
 
     ?>
@@ -331,25 +332,253 @@ function display_movie_meta_box($post) {
 }
 
 function save_movie_meta($post_id) {
-    // if (array_key_exists('movie_director', $_POST)) {
-    //     update_post_meta($post_id, 'movie_director', sanitize_text_field($_POST['movie_director']));
-    // }
-    // if (array_key_exists('movie_release_year', $_POST)) {
-    //     update_post_meta($post_id, 'movie_release_year', sanitize_text_field($_POST['movie_release_year']));
-    // }
-
 	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
     if (!isset($_POST['movie_director']) || !isset($_POST['movie_release_year'])) return;
 
-    // Save Director
     update_post_meta($post_id, 'movie_director', sanitize_text_field($_POST['movie_director']));
 
-    // Save Release Year
     update_post_meta($post_id, 'movie_release_year', sanitize_text_field($_POST['movie_release_year']));
 
-    // Save Movie Category
     if (isset($_POST['movie_category']) && $_POST['movie_category'] != '') {
         wp_set_post_terms($post_id, array(intval($_POST['movie_category'])), 'movie_category');
     }
 }
 add_action('save_post', 'save_movie_meta');
+
+function custom_edit_book_rewrite_rule() {
+    add_rewrite_rule('^edit-book/?$', 'index.php?edit_book_page=1', 'top');
+}
+add_action('init', 'custom_edit_book_rewrite_rule');
+
+function custom_edit_book_query_vars($query_vars) {
+    $query_vars[] = 'edit_book_page';
+    return $query_vars;
+}
+add_filter('query_vars', 'custom_edit_book_query_vars');
+
+function custom_edit_book_template_include($template) {
+    if (get_query_var('edit_book_page') == 1) {
+        return get_template_directory() . '/edit-book.php';
+    }
+    return $template;
+}
+add_filter('template_include', 'custom_edit_book_template_include');
+
+// function modify_robots_meta_for_non_fiction() {
+//     if (!is_single()) {
+//         return;
+//     }
+    
+// 	global $post;
+// 	if (get_post_type($post) !== 'book') {
+//         return;
+//     }
+	
+// 	$genres = wp_get_post_terms($post->ID, 'genre', array('fields' => 'names'));
+//     if (empty($genres)) {
+//         return; 
+//     }
+
+//     $is_non_fiction = false;
+//     foreach ($genres as $genre) {
+//         if ($genre === 'Non-Fiction' || term_is_ancestor_of(get_term_by('name', 'Non-Fiction', 'genre')->term_id, get_term_by('name', $genre, 'genre')->term_id, 'genre')) {
+//             $is_non_fiction = true;
+//             break;
+//         }
+//     }
+
+//     if ($is_non_fiction) {
+//         echo '<script>
+//             document.addEventListener("DOMContentLoaded", function () {
+//                 let robotsMeta = document.querySelector("meta[name=\'robots\']");
+//                 if (robotsMeta) {
+//                     robotsMeta.setAttribute("content", "no-index");
+//                 } else {
+//                     let metaTag = document.createElement("meta");
+//                     metaTag.name = "robots";
+//                     metaTag.content = "no-index";
+//                     document.head.appendChild(metaTag);
+//                 }
+//             });
+//         </script>';
+//     }
+// }
+// add_action('wp_head', 'modify_robots_meta_for_non_fiction');
+
+function modify_robots_meta_for_non_fiction() {
+	global $post;
+    if (is_single() && get_post_type($post) === 'book') {
+		$genres = wp_get_post_terms($post->ID, 'genre', array('fields' => 'names'));
+		if (!empty($genres)) {
+			foreach ($genres as $genre) {
+				if ($genre === 'Non-Fiction' || term_is_ancestor_of(get_term_by('name', 'Non-Fiction', 'genre')->term_id, get_term_by('name', $genre, 'genre')->term_id, 'genre')) {
+					echo '<script>
+						document.addEventListener("DOMContentLoaded", function () {
+							let robotsMeta = document.querySelector("meta[name=\'robots\']");
+							if (robotsMeta) {
+								robotsMeta.setAttribute("content", "no-indexx");
+							} else {
+								let metaTag = document.createElement("meta");
+								metaTag.name = "robots";
+								metaTag.content = "no-indexx";
+								document.head.appendChild(metaTag);
+							}
+						});
+					</script>';
+				}
+			}
+		}
+    }
+}
+add_action('wp_head', 'modify_robots_meta_for_non_fiction');
+
+// add_filter('robots_txt', 'custom_robots_txt_content', 10, 2);
+
+// function custom_robots_txt_content($output, $public) {
+//     // Keep WordPress default rules
+//     $output .= "\n\n# Custom rules";
+//     $output .= "\nDisallow: /private/";
+//     $output .= "\nDisallow: /hidden-data/";
+//     $output .= "\n\n# This is a custom note for local testing";
+
+//     return $output;
+// }
+
+// Custom Rewrite Rule for robots.txt
+function custom_robots_txt_rewrite_rule() {
+    add_rewrite_rule('^robots\.txt$', 'index.php?robots=1', 'top');
+}
+add_action('init', 'custom_robots_txt_rewrite_rule');
+
+// function custom_robots_txt_content_for_rewrite($output) {
+// 	$output .= "\n# Custom note: Created by Ahmad Mughal";
+//     return $output;
+// }
+// add_filter('robots_txt', 'custom_robots_txt_content_for_rewrite');
+
+function custom_robots_txt_content_for_rewrite($output) {
+    $output = "# Custom note: Created by Ahmad Mughal";
+    return $output;
+}
+add_filter('robots_txt', 'custom_robots_txt_content_for_rewrite');
+
+
+// Chargebee subscription...
+
+// Shortcode to check Chargebee subscriptions
+// add_shortcode('chargebee_subscriptions', 'check_chargebee_subscriptions');
+
+function check_chargebee_subscriptions($atts) {
+    $atts = shortcode_atts([
+        'customer_id' => ''
+    ], $atts);
+
+    if (empty($atts['customer_id'])) {
+        return '<p>No customer ID provided.</p>';
+    }
+
+    $subscriptions = get_chargebee_subscriptions($atts['customer_id']);
+
+    if (empty($subscriptions)) {
+        return '<p>No active subscriptions found.</p>';
+    }
+
+    ob_start();
+    echo '<h3>Active Subscriptions:</h3><ul>';
+    foreach ($subscriptions as $sub) {
+        echo '<li>' . esc_html($sub['plan_id']) . ' (Status: ' . esc_html($sub['status']) . ')</li>';
+    }
+    echo '</ul>';
+    return ob_get_clean();
+}
+
+function get_chargebee_subscriptions($customer_id) {
+    $api_key = 'test_oaN9jtCPglEyfA2jFsb8RVY2dPUvNpCh';
+    $site = 'vice-test';
+
+    $url = "https://$site.chargebee.com/api/v2/customers/$customer_id/subscriptions";
+
+    $response = wp_remote_get($url, [
+        'headers' => [
+            'Authorization' => 'Basic ' . base64_encode($api_key . ':')
+        ]
+    ]);
+
+    if (is_wp_error($response)) {
+        return [];
+    }
+
+    $body = json_decode(wp_remote_retrieve_body($response), true);
+    $subscriptions = [];
+
+    if (isset($body['list'])) {
+        foreach ($body['list'] as $entry) {
+            $sub = $entry['subscription'];
+            $subscriptions[] = [
+                'plan_id' => $sub['plan_id'],
+                'status' => $sub['status'],
+                'current_term_end' => $sub['current_term_end']
+            ];
+        }
+    }
+
+    return $subscriptions;
+}
+
+add_shortcode('chargebee_subscriptions', 'cb_show_subscriptions');
+function cb_show_subscriptions($atts) {
+    $atts = shortcode_atts([
+        'customer_id' => ''
+    ], $atts);
+
+    if (empty($atts['customer_id'])) {
+        return 'Customer ID is missing.';
+    }
+
+    $api_key = 'test_oaN9jtCPglEyfA2jFsb8RVY2dPUvNpCh';
+    $site = 'vice-test';
+    $customer_id = sanitize_text_field($atts['customer_id']);
+
+    $ch = curl_init("https://$site.chargebee.com/api/v2/subscriptions?customer_id=$customer_id");
+
+    curl_setopt($ch, CURLOPT_USERPWD, $api_key . ':');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($http_status != 200) {
+        return 'Failed to fetch subscription data. Status code: ' . $http_status;
+    }
+
+    $data = json_decode($response, true);
+	echo '<pre>';
+	print_r($data);
+	echo '</pre>';
+
+    if (empty($data['list'])) {
+        return 'No subscriptions found.';
+    }
+
+    $output = '<div class="chargebee-subscriptions">';
+    foreach ($data['list'] as $item) {
+        $sub = $item['subscription'];
+        $plan_id = isset($sub['plan_id']) ? esc_html($sub['plan_id']) : 'N/A';
+        $status = esc_html($sub['status']);
+        $start_date = date('Y-m-d', $sub['start_date']);
+        $end_date = isset($sub['current_term_end']) ? date('Y-m-d', $sub['current_term_end']) : 'N/A';
+
+        $output .= "<div class='cb-sub-box'>";
+        $output .= "<strong>Plan:</strong> $plan_id<br>";
+        $output .= "<strong>Status:</strong> $status<br>";
+        $output .= "<strong>Start Date:</strong> $start_date<br>";
+        $output .= "<strong>End Date:</strong> $end_date<br>";
+        $output .= "</div><hr>";
+    }
+    $output .= '</div>';
+
+    return $output;
+}
+
+
