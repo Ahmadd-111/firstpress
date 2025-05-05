@@ -127,3 +127,203 @@ Stack trace:
 [21-Mar-2025 11:03:16 UTC]   Automatic plugin updates starting...
 [21-Mar-2025 11:03:16 UTC]   Automatic plugin updates complete.
 [21-Mar-2025 11:03:17 UTC] Automatic updates complete.
+[03-Apr-2025 08:43:53 UTC] Automatic updates starting...
+[03-Apr-2025 08:43:58 UTC]   Automatic plugin updates starting...
+[03-Apr-2025 08:43:58 UTC]   Automatic plugin updates complete.
+[03-Apr-2025 08:44:00 UTC] Automatic updates complete.
+[03-Apr-2025 11:24:52 UTC] Automatic updates starting...
+[03-Apr-2025 11:24:54 UTC]   Automatic plugin updates starting...
+[03-Apr-2025 11:24:54 UTC]   Automatic plugin updates complete.
+[03-Apr-2025 11:24:55 UTC] Automatic updates complete.
+[04-Apr-2025 07:51:18 UTC] Automatic updates starting...
+[04-Apr-2025 07:51:20 UTC]   Automatic plugin updates starting...
+[04-Apr-2025 07:51:20 UTC]   Automatic plugin updates complete.
+[04-Apr-2025 07:51:22 UTC] Automatic updates complete.
+[04-Apr-2025 15:00:07 UTC] Automatic updates starting...
+[04-Apr-2025 15:00:08 UTC]   Automatic plugin updates starting...
+[04-Apr-2025 15:00:08 UTC]   Automatic plugin updates complete.
+[04-Apr-2025 15:00:09 UTC] Automatic updates complete.
+[14-Apr-2025 10:11:09 UTC] Automatic updates starting...
+[14-Apr-2025 10:11:11 UTC]   Automatic plugin updates starting...
+[14-Apr-2025 10:11:11 UTC]   Automatic plugin updates complete.
+[14-Apr-2025 10:11:13 UTC] Automatic updates complete.
+[14-Apr-2025 11:03:15 UTC] Automatic updates starting...
+[14-Apr-2025 11:03:15 UTC]   Automatic plugin updates starting...
+[14-Apr-2025 11:03:15 UTC]   Automatic plugin updates complete.
+[14-Apr-2025 11:03:15 UTC] Automatic updates complete.
+[16-Apr-2025 11:26:41 UTC] Automatic updates starting...
+[16-Apr-2025 11:26:44 UTC]   Automatic plugin updates starting...
+[16-Apr-2025 11:26:44 UTC]   Automatic plugin updates complete.
+[16-Apr-2025 11:26:45 UTC]   Automatic theme updates starting...
+[16-Apr-2025 11:26:45 UTC]   Automatic theme updates complete.
+[16-Apr-2025 11:26:45 UTC] Automatic updates complete.
+[16-Apr-2025 15:31:03 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "append_to_robots_file_once" not found or invalid function name in C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php:324
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-settings.php(704): do_action('init')
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-config.php(107): require_once('C:\\xampp8.2.12\\...')
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-load.php(50): require_once('C:\\xampp8.2.12\\...')
+#5 C:\xampp8.2.12\htdocs\firstpress\wp-blog-header.php(13): require_once('C:\\xampp8.2.12\\...')
+#6 C:\xampp8.2.12\htdocs\firstpress\index.php(17): require('C:\\xampp8.2.12\\...')
+#7 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php on line 324
+[16-Apr-2025 15:31:07 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "append_to_robots_file_once" not found or invalid function name in C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php:324
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-settings.php(704): do_action('init')
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-config.php(107): require_once('C:\\xampp8.2.12\\...')
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-load.php(50): require_once('C:\\xampp8.2.12\\...')
+#5 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(22): require_once('C:\\xampp8.2.12\\...')
+#6 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php on line 324
+[16-Apr-2025 15:31:09 UTC] PHP Fatal error:  Uncaught TypeError: call_user_func_array(): Argument #1 ($callback) must be a valid callback, function "append_to_robots_file_once" not found or invalid function name in C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php:324
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-settings.php(704): do_action('init')
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-config.php(107): require_once('C:\\xampp8.2.12\\...')
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-load.php(50): require_once('C:\\xampp8.2.12\\...')
+#5 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin.php(34): require_once('C:\\xampp8.2.12\\...')
+#6 C:\xampp8.2.12\htdocs\firstpress\wp-admin\options-permalink.php(10): require_once('C:\\xampp8.2.12\\...')
+#7 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php on line 324
+[16-Apr-2025 15:55:55 UTC] robots_txt filter is working!
+[16-Apr-2025 15:56:29 UTC] robots_txt filter is working!
+[17-Apr-2025 07:10:56 UTC] Automatic updates starting...
+[17-Apr-2025 07:10:58 UTC]   Automatic plugin updates starting...
+[17-Apr-2025 07:10:58 UTC]   Automatic plugin updates complete.
+[17-Apr-2025 07:10:59 UTC]   Automatic theme updates starting...
+[17-Apr-2025 07:10:59 UTC]   Automatic theme updates complete.
+[17-Apr-2025 07:10:59 UTC] Automatic updates complete.
+[17-Apr-2025 11:07:22 UTC] Automatic updates starting...
+[17-Apr-2025 11:07:26 UTC]   Automatic plugin updates starting...
+[17-Apr-2025 11:07:26 UTC]   Automatic plugin updates complete.
+[17-Apr-2025 11:07:29 UTC]   Automatic theme updates starting...
+[17-Apr-2025 11:07:29 UTC]   Automatic theme updates complete.
+[17-Apr-2025 11:07:29 UTC] Automatic updates complete.
+[17-Apr-2025 11:08:06 UTC] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber\includes\admin\theme-options\theme-options.php on line 683
+[17-Apr-2025 11:08:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wpcom_vip_add_role() in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber-child-theme\functions.php:628
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): {closure}('')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin.php(175): do_action('admin_init')
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\themes.php(10): require_once('C:\\xampp8.2.12\\...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber-child-theme\functions.php on line 628
+[17-Apr-2025 11:08:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-recovery-mode-email-service.php on line 367
+[17-Apr-2025 11:08:06 UTC] PHP Warning:  Trying to access array offset on value of type bool in C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-recovery-mode-email-service.php on line 368
+[17-Apr-2025 11:08:17 UTC] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber\includes\admin\theme-options\theme-options.php on line 683
+[17-Apr-2025 11:08:18 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wpcom_vip_add_role() in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber-child-theme\functions.php:628
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): {closure}('')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin.php(175): do_action('admin_init')
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\themes.php(10): require_once('C:\\xampp8.2.12\\...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber-child-theme\functions.php on line 628
+[17-Apr-2025 11:08:27 UTC] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber\includes\admin\theme-options\theme-options.php on line 683
+[17-Apr-2025 11:08:27 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wpcom_vip_add_role() in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber-child-theme\functions.php:628
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): {closure}('')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin.php(175): do_action('admin_init')
+#4 C:\xampp8.2.12\htdocs\firstpress\wp-admin\theme-install.php(10): require_once('C:\\xampp8.2.12\\...')
+#5 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber-child-theme\functions.php on line 628
+[17-Apr-2025 11:09:00 UTC] PHP Deprecated:  Constant FILTER_SANITIZE_STRING is deprecated in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber\includes\admin\theme-options\theme-options.php on line 683
+[17-Apr-2025 11:09:02 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wpcom_vip_add_role() in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber-child-theme\functions.php:628
+Stack trace:
+#0 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(324): {closure}('')
+#1 C:\xampp8.2.12\htdocs\firstpress\wp-includes\class-wp-hook.php(348): WP_Hook->apply_filters(NULL, Array)
+#2 C:\xampp8.2.12\htdocs\firstpress\wp-includes\plugin.php(517): WP_Hook->do_action(Array)
+#3 C:\xampp8.2.12\htdocs\firstpress\wp-admin\admin-ajax.php(45): do_action('admin_init')
+#4 {main}
+  thrown in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\bimber-child-theme\functions.php on line 628
+[17-Apr-2025 11:42:19 UTC] PHP Warning:  Undefined variable $bimber_searchform in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 11:42:19 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 11:42:46 UTC] PHP Warning:  Undefined variable $bimber_searchform in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 11:42:46 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 11:54:18 UTC] PHP Warning:  Undefined variable $bimber_searchform in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 11:54:18 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 11:55:13 UTC] PHP Warning:  Undefined variable $bimber_searchform in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 11:55:13 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 12:01:50 UTC] PHP Warning:  Undefined variable $bimber_searchform in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[17-Apr-2025 12:01:50 UTC] PHP Warning:  Trying to access array offset on value of type null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\hello-elementor\searchform.php on line 24
+[05-May-2025 11:26:38 UTC] Automatic updates starting...
+[05-May-2025 11:26:41 UTC]   Automatic plugin updates starting...
+[05-May-2025 11:26:41 UTC]   Automatic plugin updates complete.
+[05-May-2025 11:26:42 UTC]   Automatic theme updates starting...
+[05-May-2025 11:26:42 UTC]   Automatic theme updates complete.
+[05-May-2025 11:26:42 UTC] Automatic updates complete.
+[05-May-2025 11:38:30 UTC] PHP Warning:  Undefined array key "plan_id" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 518
+[05-May-2025 11:38:35 UTC] PHP Warning:  Undefined array key "plan_id" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 518
+[05-May-2025 11:38:47 UTC] PHP Warning:  Undefined array key "plan_id" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 518
+[05-May-2025 11:39:13 UTC] PHP Warning:  Undefined array key "plan_id" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 518
+[05-May-2025 11:39:28 UTC] PHP Warning:  Undefined array key "plan_id" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 518
+[05-May-2025 11:43:32 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 566
+[05-May-2025 11:43:32 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 566
+[05-May-2025 11:45:02 UTC] PHP Warning:  Array to string conversion in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 556
+[05-May-2025 11:45:02 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 567
+[05-May-2025 11:45:02 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 567
+[05-May-2025 11:45:20 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 567
+[05-May-2025 11:45:20 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 567
+[05-May-2025 11:46:10 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 569
+[05-May-2025 11:46:10 UTC] PHP Warning:  Undefined array key "start_date" in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 569
+[05-May-2025 12:33:20 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:20 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:21 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:22 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:24 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:24 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:24 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:24 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:25 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:25 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:25 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:25 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:26 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:26 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:30 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:30 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:31 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:41 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:41 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:42 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:43 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:50 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:51 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:51 UTC] PHP Warning:  Undefined variable $current_user in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 661
+[05-May-2025 12:33:51 UTC] PHP Warning:  Attempt to read property "display_name" on null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 661
+[05-May-2025 12:33:51 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:52 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:33:53 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:01 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:02 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:11 UTC] PHP Warning:  Undefined variable $current_user in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 661
+[05-May-2025 12:34:11 UTC] PHP Warning:  Attempt to read property "display_name" on null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 661
+[05-May-2025 12:34:11 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:24 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:25 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:27 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:36 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:37 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:43 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:34:44 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:35:44 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:35:45 UTC] PHP Warning:  Undefined variable $current_user in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 661
+[05-May-2025 12:35:45 UTC] PHP Warning:  Attempt to read property "display_name" on null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 661
+[05-May-2025 12:35:45 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:35:45 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:37:17 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:37:18 UTC] PHP Warning:  Undefined variable $current_user in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 661
+[05-May-2025 12:37:18 UTC] PHP Warning:  Attempt to read property "display_name" on null in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 661
+[05-May-2025 12:37:18 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:37:19 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:37:20 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:37:32 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662
+[05-May-2025 12:37:34 UTC] PHP Warning:  Undefined variable $customer_token in C:\xampp8.2.12\htdocs\firstpress\wp-content\themes\twentytwentyfour\functions.php on line 662

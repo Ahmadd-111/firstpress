@@ -431,3 +431,154 @@ function modify_robots_meta_for_non_fiction() {
     }
 }
 add_action('wp_head', 'modify_robots_meta_for_non_fiction');
+
+// add_filter('robots_txt', 'custom_robots_txt_content', 10, 2);
+
+// function custom_robots_txt_content($output, $public) {
+//     // Keep WordPress default rules
+//     $output .= "\n\n# Custom rules";
+//     $output .= "\nDisallow: /private/";
+//     $output .= "\nDisallow: /hidden-data/";
+//     $output .= "\n\n# This is a custom note for local testing";
+
+//     return $output;
+// }
+
+// Custom Rewrite Rule for robots.txt
+function custom_robots_txt_rewrite_rule() {
+    add_rewrite_rule('^robots\.txt$', 'index.php?robots=1', 'top');
+}
+add_action('init', 'custom_robots_txt_rewrite_rule');
+
+// function custom_robots_txt_content_for_rewrite($output) {
+// 	$output .= "\n# Custom note: Created by Ahmad Mughal";
+//     return $output;
+// }
+// add_filter('robots_txt', 'custom_robots_txt_content_for_rewrite');
+
+function custom_robots_txt_content_for_rewrite($output) {
+    $output = "# Custom note: Created by Ahmad Mughal";
+    return $output;
+}
+add_filter('robots_txt', 'custom_robots_txt_content_for_rewrite');
+
+
+// Chargebee subscription...
+
+// Shortcode to check Chargebee subscriptions
+// add_shortcode('chargebee_subscriptions', 'check_chargebee_subscriptions');
+
+function check_chargebee_subscriptions($atts) {
+    $atts = shortcode_atts([
+        'customer_id' => ''
+    ], $atts);
+
+    if (empty($atts['customer_id'])) {
+        return '<p>No customer ID provided.</p>';
+    }
+
+    $subscriptions = get_chargebee_subscriptions($atts['customer_id']);
+
+    if (empty($subscriptions)) {
+        return '<p>No active subscriptions found.</p>';
+    }
+
+    ob_start();
+    echo '<h3>Active Subscriptions:</h3><ul>';
+    foreach ($subscriptions as $sub) {
+        echo '<li>' . esc_html($sub['plan_id']) . ' (Status: ' . esc_html($sub['status']) . ')</li>';
+    }
+    echo '</ul>';
+    return ob_get_clean();
+}
+
+function get_chargebee_subscriptions($customer_id) {
+    $api_key = 'test_oaN9jtCPglEyfA2jFsb8RVY2dPUvNpCh';
+    $site = 'vice-test';
+
+    $url = "https://$site.chargebee.com/api/v2/customers/$customer_id/subscriptions";
+
+    $response = wp_remote_get($url, [
+        'headers' => [
+            'Authorization' => 'Basic ' . base64_encode($api_key . ':')
+        ]
+    ]);
+
+    if (is_wp_error($response)) {
+        return [];
+    }
+
+    $body = json_decode(wp_remote_retrieve_body($response), true);
+    $subscriptions = [];
+
+    if (isset($body['list'])) {
+        foreach ($body['list'] as $entry) {
+            $sub = $entry['subscription'];
+            $subscriptions[] = [
+                'plan_id' => $sub['plan_id'],
+                'status' => $sub['status'],
+                'current_term_end' => $sub['current_term_end']
+            ];
+        }
+    }
+
+    return $subscriptions;
+}
+
+add_shortcode('chargebee_subscriptions', 'cb_show_subscriptions');
+function cb_show_subscriptions($atts) {
+    $atts = shortcode_atts([
+        'customer_id' => ''
+    ], $atts);
+
+    if (empty($atts['customer_id'])) {
+        return 'Customer ID is missing.';
+    }
+
+    $api_key = 'test_oaN9jtCPglEyfA2jFsb8RVY2dPUvNpCh';
+    $site = 'vice-test';
+    $customer_id = sanitize_text_field($atts['customer_id']);
+
+    $ch = curl_init("https://$site.chargebee.com/api/v2/subscriptions?customer_id=$customer_id");
+
+    curl_setopt($ch, CURLOPT_USERPWD, $api_key . ':');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    $response = curl_exec($ch);
+    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($http_status != 200) {
+        return 'Failed to fetch subscription data. Status code: ' . $http_status;
+    }
+
+    $data = json_decode($response, true);
+	echo '<pre>';
+	print_r($data);
+	echo '</pre>';
+
+    if (empty($data['list'])) {
+        return 'No subscriptions found.';
+    }
+
+    $output = '<div class="chargebee-subscriptions">';
+    foreach ($data['list'] as $item) {
+        $sub = $item['subscription'];
+        $plan_id = isset($sub['plan_id']) ? esc_html($sub['plan_id']) : 'N/A';
+        $status = esc_html($sub['status']);
+        $start_date = date('Y-m-d', $sub['start_date']);
+        $end_date = isset($sub['current_term_end']) ? date('Y-m-d', $sub['current_term_end']) : 'N/A';
+
+        $output .= "<div class='cb-sub-box'>";
+        $output .= "<strong>Plan:</strong> $plan_id<br>";
+        $output .= "<strong>Status:</strong> $status<br>";
+        $output .= "<strong>Start Date:</strong> $start_date<br>";
+        $output .= "<strong>End Date:</strong> $end_date<br>";
+        $output .= "</div><hr>";
+    }
+    $output .= '</div>';
+
+    return $output;
+}
+
+
