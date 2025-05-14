@@ -462,123 +462,144 @@ function custom_robots_txt_content_for_rewrite($output) {
 }
 add_filter('robots_txt', 'custom_robots_txt_content_for_rewrite');
 
+function url_encoder_shortcode_callback() {
+    $original_url = "https://americansongwriter-com-preprod.go-vip.net/it-came-from-the-british-invasion-for-your-love-the-song-that-gained-the-yardbirds-a-big-hit-and-lost-them-a-legendary-guitarist/";
 
-// Chargebee subscription...
+    // Encryption key (must be 16, 24, or 32 characters for AES)
+    $key = 'secretkey1234567'; // 16 characters
+    $iv = substr(hash('sha256', $key), 0, 16); // Create 16-byte IV
 
-// Shortcode to check Chargebee subscriptions
-// add_shortcode('chargebee_subscriptions', 'check_chargebee_subscriptions');
+    // Encode: Encrypt + base64 + safe chars
+    $encrypted = openssl_encrypt($original_url, 'AES-128-CBC', $key, 0, $iv);
+    $encoded = rtrim(strtr(base64_encode($encrypted), '+/', '-_'), '=');
 
-function check_chargebee_subscriptions($atts) {
-    $atts = shortcode_atts([
-        'customer_id' => ''
-    ], $atts);
+    // Decode: Reverse base64 and decrypt
+    $decoded_base64 = base64_decode(strtr($encoded, '-_', '+/'));
+    $decoded = openssl_decrypt($decoded_base64, 'AES-128-CBC', $key, 0, $iv);
 
-    if (empty($atts['customer_id'])) {
-        return '<p>No customer ID provided.</p>';
-    }
-
-    $subscriptions = get_chargebee_subscriptions($atts['customer_id']);
-
-    if (empty($subscriptions)) {
-        return '<p>No active subscriptions found.</p>';
-    }
-
-    ob_start();
-    echo '<h3>Active Subscriptions:</h3><ul>';
-    foreach ($subscriptions as $sub) {
-        echo '<li>' . esc_html($sub['plan_id']) . ' (Status: ' . esc_html($sub['status']) . ')</li>';
-    }
-    echo '</ul>';
-    return ob_get_clean();
-}
-
-function get_chargebee_subscriptions($customer_id) {
-    $api_key = 'test_oaN9jtCPglEyfA2jFsb8RVY2dPUvNpCh';
-    $site = 'vice-test';
-
-    $url = "https://$site.chargebee.com/api/v2/customers/$customer_id/subscriptions";
-
-    $response = wp_remote_get($url, [
-        'headers' => [
-            'Authorization' => 'Basic ' . base64_encode($api_key . ':')
-        ]
-    ]);
-
-    if (is_wp_error($response)) {
-        return [];
-    }
-
-    $body = json_decode(wp_remote_retrieve_body($response), true);
-    $subscriptions = [];
-
-    if (isset($body['list'])) {
-        foreach ($body['list'] as $entry) {
-            $sub = $entry['subscription'];
-            $subscriptions[] = [
-                'plan_id' => $sub['plan_id'],
-                'status' => $sub['status'],
-                'current_term_end' => $sub['current_term_end']
-            ];
+	$style = '
+    <style>
+        .url-box {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ccc;
+            word-break: break-all;
+            overflow-wrap: anywhere;
+            font-family: monospace;
+            max-width: 100%;
         }
-    }
+    </style>';
 
-    return $subscriptions;
-}
+	$output  = $style;
+    $output .= "<h3>Original URL:</h3>";
+    $output .= "<div class='url-box'>{$original_url}</div>";
+    $output .= "<p><strong>Length:</strong> " . strlen($original_url) . " characters</p>";
 
-add_shortcode('chargebee_subscriptions', 'cb_show_subscriptions');
-function cb_show_subscriptions($atts) {
-    $atts = shortcode_atts([
-        'customer_id' => ''
-    ], $atts);
+    $output .= "<h3>Encoded String:</h3>";
+    $output .= "<div class='url-box'>{$encoded}</div>";
+    $output .= "<p><strong>Length:</strong> " . strlen($encoded) . " characters</p>";
 
-    if (empty($atts['customer_id'])) {
-        return 'Customer ID is missing.';
-    }
-
-    $api_key = 'test_oaN9jtCPglEyfA2jFsb8RVY2dPUvNpCh';
-    $site = 'vice-test';
-    $customer_id = sanitize_text_field($atts['customer_id']);
-
-    $ch = curl_init("https://$site.chargebee.com/api/v2/subscriptions?customer_id=$customer_id");
-
-    curl_setopt($ch, CURLOPT_USERPWD, $api_key . ':');
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $response = curl_exec($ch);
-    $http_status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-
-    if ($http_status != 200) {
-        return 'Failed to fetch subscription data. Status code: ' . $http_status;
-    }
-
-    $data = json_decode($response, true);
-	echo '<pre>';
-	print_r($data);
-	echo '</pre>';
-
-    if (empty($data['list'])) {
-        return 'No subscriptions found.';
-    }
-
-    $output = '<div class="chargebee-subscriptions">';
-    foreach ($data['list'] as $item) {
-        $sub = $item['subscription'];
-        $plan_id = isset($sub['plan_id']) ? esc_html($sub['plan_id']) : 'N/A';
-        $status = esc_html($sub['status']);
-        $start_date = date('Y-m-d', $sub['start_date']);
-        $end_date = isset($sub['current_term_end']) ? date('Y-m-d', $sub['current_term_end']) : 'N/A';
-
-        $output .= "<div class='cb-sub-box'>";
-        $output .= "<strong>Plan:</strong> $plan_id<br>";
-        $output .= "<strong>Status:</strong> $status<br>";
-        $output .= "<strong>Start Date:</strong> $start_date<br>";
-        $output .= "<strong>End Date:</strong> $end_date<br>";
-        $output .= "</div><hr>";
-    }
-    $output .= '</div>';
+    $output .= "<h3>Decoded URL:</h3>";
+    $output .= "<div class='url-box'>{$decoded}</div>";
 
     return $output;
 }
+add_shortcode('url_encoder_shortcode', 'url_encoder_shortcode_callback');
 
 
+// Start of Implementation of restricted gutenberg user
+
+// function register_contributing_author_role() {
+//     add_role(
+//         'contributing_author',
+//         'Contributing Author',
+//         [
+//             'read'                  => true,
+//             'edit_posts'            => true, 
+//             'edit_published_posts'  => false,
+//             'delete_posts'          => false,
+//             'delete_published_posts'=> false,
+//             'publish_posts'         => false,
+//             'upload_files'          => true,
+//         ]
+//     );
+// }
+// add_action('init', 'register_contributing_author_role');
+
+// function create_contributing_author_user() {
+//     $username = 'contributingAuthor';
+//     $password = 'contributing_author';
+//     $email    = 'ammar@wingmanwp.com';
+
+//     if (!username_exists($username) && !email_exists($email)) {
+//         $user_id = wp_create_user($username, $password, $email);
+//         if (!is_wp_error($user_id)) {
+//             $user = new WP_User($user_id);
+//             $user->set_role('contributing_author');
+//         }
+//     }
+// }
+// add_action('init', 'create_contributing_author_user');
+
+// function hide_delete_row_actions_contributing_author($actions, $post) {
+//     if (current_user_can('contributing_author') && get_current_user_id() === $post->post_author) {
+//         unset($actions['trash']);
+//         unset($actions['delete']);
+//     }
+//     return $actions;
+// }
+// add_filter('post_row_actions', 'hide_delete_row_actions_contributing_author', 10, 2);
+
+// function limit_posts_to_own_contributing_author($query) {
+//     if (
+//         is_admin() &&
+//         $query->is_main_query() &&
+//         current_user_can('contributing_author') &&
+//         !current_user_can('edit_others_posts')
+//     ) {
+//         $query->set('author', get_current_user_id());
+//     }
+// }
+// add_action('pre_get_posts', 'limit_posts_to_own_contributing_author');
+
+// function block_published_post_editing_contributing_author() {
+//     global $post;
+//     if (
+//         current_user_can('contributing_author') &&
+//         get_current_user_id() === $post->post_author &&
+//         $post->post_status === 'publish'
+//     ) {
+//         wp_die('You cannot edit published posts.');
+//     }
+// }
+// add_action('load-post.php', 'block_published_post_editing_contributing_author');
+
+// function restrict_media_library_to_own_uploads($query) {
+//     global $pagenow;
+
+//     if (
+//         is_admin() &&
+//         $pagenow === 'upload.php' &&
+//         $query->is_main_query() &&
+//         current_user_can('contributing_author') &&
+//         !current_user_can('edit_others_posts')
+//     ) {
+//         $query->set('author', get_current_user_id());
+//     }
+// }
+// add_action('pre_get_posts', 'restrict_media_library_to_own_uploads');
+
+// function filter_media_library_ajax_for_contributing_author($query) {
+//     if (
+//         is_admin() &&
+//         defined('DOING_AJAX') && DOING_AJAX &&
+//         isset($_POST['action']) && $_POST['action'] === 'query-attachments' &&
+//         current_user_can('contributing_author') &&
+//         !current_user_can('edit_others_posts')
+//     ) {
+//         $query['author'] = get_current_user_id();
+//     }
+
+//     return $query;
+// }
+// add_filter('ajax_query_attachments_args', 'filter_media_library_ajax_for_contributing_author');
