@@ -6,6 +6,7 @@ defined('ABSPATH') || exit;
  */
 function notify_post_review_by_external_contributor($new_status, $old_status, $post) {
     if (
+        $old_status !== 'pending' &&
         $new_status === 'pending' &&
         $post->post_type === 'post'
     ) {

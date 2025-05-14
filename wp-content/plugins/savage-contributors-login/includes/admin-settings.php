@@ -1,21 +1,18 @@
 <?php
 defined('ABSPATH') || exit;
 
-// Add admin menu
 add_action('admin_menu', function() {
-    add_menu_page(
-        __('Contributors Login', 'savage-contributors-login'),
-        __('Contributors Login', 'savage-contributors-login'),
-        'manage_options',
-        'scl-settings',
-        'scl_settings_page',
-        'dashicons-admin-users',
-        80
+    add_options_page(
+        __('Custom Login Form', 'savage-contributors-login'),
+        __('Custom Login Form', 'savage-contributors-login'), 
+        'manage_options',                                    
+        'custom-login-settings',                         
+        'scl_settings_page'                               
     );
 });
 
 add_action('admin_enqueue_scripts', function($hook) {
-    if ($hook !== 'toplevel_page_scl-settings') {
+    if ($hook !== 'settings_page_custom-login-settings') {
         return;
     }
     wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', [], '4.1.0');
@@ -24,11 +21,16 @@ add_action('admin_enqueue_scripts', function($hook) {
     wp_add_inline_style('select2', '
         #scl_shortcode_message {
             width: 800px;
-            background: #f1f1f1;
+            background: #fff;
             padding: 15px;
             border: 1px solid #ddd;
             margin-bottom: 20px;
             text-align: left;
+            height: 70px;
+            align-content: center;
+            border-radius: 5px;
+            box-sizing: border-box;
+            padding-left: 15px;
         }
         #scl_shortcode_message p {
             margin: 0;
@@ -40,6 +42,7 @@ add_action('admin_enqueue_scripts', function($hook) {
             font-size: 14px;
             line-height: 1.5;
             height: 40px;
+            border: 1px solid #aaa;
         }
         .select2-container {
             width: 800px !important;
@@ -53,13 +56,18 @@ add_action('admin_enqueue_scripts', function($hook) {
         .select2-selection__choice {
             margin-top: 4px;
         }
+        #contributors_usernames:focus {
+            border: 1px solid #000;
+            outline: none;
+            box-shadow: none
+        } 
     ');
 });
 
 function scl_settings_page() {
     ?>
     <div class="wrap">
-        <h1><?php _e('Contributors Login Settings', 'savage-contributors-login'); ?></h1>
+        <h1><?php _e('Custom Login Form Settings', 'savage-contributors-login'); ?></h1>
         <form method="post" action="options.php">
             <?php
             settings_fields('scl_settings_group');
@@ -67,21 +75,6 @@ function scl_settings_page() {
             submit_button();
             ?>
         </form>
-        <h2><?php _e('Stored Values (For Testing)', 'savage-contributors-login'); ?></h2>
-        <p><strong><?php _e('Usernames:', 'savage-contributors-login'); ?></strong> 
-            <?php
-            $usernames = get_option('contributors_usernames', '');
-            echo !empty($usernames) ? esc_html($usernames) : 'None';
-            ?>
-        </p>
-        <p><strong><?php _e('Roles:', 'savage-contributors-login'); ?></strong> 
-            <?php
-            $roles = get_option('contributors_roles', []);
-            echo !empty($roles) ? esc_html(implode(', ', array_map(function($role) {
-                return wp_roles()->get_names()[$role] ?? $role;
-            }, $roles))) : 'None';
-            ?>
-        </p>
     </div>
     <?php
 }
@@ -119,9 +112,12 @@ add_action('admin_init', function() {
             ?>
             <div id="scl_shortcode_message">
                 <p>
-                    <?php _e('Use this shortcode for creating the login page: <code>[contributor_login_form]</code>', 'savage-contributors-login'); ?>
+                    <?php _e('Use this shortcode for creating the custom login form: <code>[custom_login_form]</code>', 'savage-contributors-login'); ?>
                 </p>
             </div>
+            <p style="margin-top: 50px; font-weight: 500;">
+                <?php _e('Only the usernames or roles listed below will be allowed to log in using the custom login form.', 'savage-contributors-login'); ?>
+            </p>
             <?php
         },
         'scl-settings',

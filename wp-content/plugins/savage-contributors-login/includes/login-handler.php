@@ -16,7 +16,7 @@ function scl_process_contributor_login() {
     // Get form data
     $username = sanitize_text_field($_POST['username'] ?? '');
     $password = $_POST['password'] ?? '';
-    $remember = isset($_POST['rememberme']) ? true : false;
+    // $remember = isset($_POST['rememberme']) ? true : false;
 
     $contributor_usernames = get_option('contributors_usernames', '');
     $contributor_roles = get_option('contributors_roles', []);
@@ -42,7 +42,7 @@ function scl_process_contributor_login() {
         $creds = [
             'user_login' => $username,
             'user_password' => $password,
-            'remember' => $remember,
+            // 'remember' => $remember,
         ];
 
         $user = wp_signon($creds, is_ssl());
