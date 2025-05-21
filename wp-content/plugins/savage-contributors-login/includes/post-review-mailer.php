@@ -13,7 +13,14 @@ function notify_post_review_by_external_contributor($new_status, $old_status, $p
         $author = get_user_by('id', $post->post_author);
 
         if ($author && in_array('external_contributor', (array) $author->roles, true)) {
-            $to = 'ammar@wingmanwp.com';
+
+            $emails_string = get_option('contributor_post_notification_emails', '');
+            $emails_array = array_filter(array_map('trim', explode(',', $emails_string)));
+
+            if (empty($emails_array)) {
+                return;
+            }
+
             $subject = sprintf('Post Review Request from %s (External Contributor)', $author->user_login);
 
             $message = sprintf(
@@ -29,7 +36,11 @@ function notify_post_review_by_external_contributor($new_status, $old_status, $p
                 $post->post_title,
                 admin_url("post.php?post={$post->ID}&action=edit")
             );
-            wp_mail($to, $subject, $message);
+            foreach ($emails_array as $email) {
+                if (is_email($email)) {
+                    wp_mail($email, $subject, $message);
+                }
+            }
         }
     }
 }

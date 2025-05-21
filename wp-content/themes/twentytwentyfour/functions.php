@@ -603,3 +603,21 @@ add_shortcode('url_encoder_shortcode', 'url_encoder_shortcode_callback');
 //     return $query;
 // }
 // add_filter('ajax_query_attachments_args', 'filter_media_library_ajax_for_contributing_author');
+
+add_action('admin_footer', function () {
+    if (!current_user_can('external_contributor')) {
+        return;
+    }
+
+    global $menu;
+
+    $menu_data = [];
+    foreach ($menu as $item) {
+        $menu_data[] = [
+            'title' => isset($item[0]) ? $item[0] : '',
+            'slug'  => isset($item[2]) ? $item[2] : '',
+        ];
+    }
+
+    echo '<script>console.groupCollapsed("Admin Menu Debug");console.table(' . json_encode($menu_data) . ');console.groupEnd();</script>';
+}, 999);
